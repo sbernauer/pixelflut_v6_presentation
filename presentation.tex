@@ -1,0 +1,128 @@
+%\documentclass{beamer}
+%\documentclass[handout]{beamer}
+%\documentclass[12pt,handout]{beamer}
+\documentclass[12pt,donthandout,notes=dontshow,xcolor=table]{beamer}
+
+\NeedsTeXFormat{LaTeX2e}
+\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=.5,debug]{beamerposter} 
+\usepackage[utf8]{inputenc}
+%\usepackage[german]{babel}
+
+\usepackage{tcolorbox}
+
+%\usepackage[table]{xcolor}
+%\usepackage{tabularx}
+%\usepackage{textcomp}
+%\usepackage{tikz}
+%\usetikzlibrary{shapes,arrows,positioning,trees,shadings,decorations.pathreplacing,backgrounds}
+%\usepackage{tcolorbox}
+%\usepackage{pdfpages}
+%\usepackage{listings}
+%\usepackage{longtable}
+%
+%\usepackage{minted}
+
+%\usetheme{Madrid}
+\usetheme{Goettingen}
+
+%%%%%%%%%%% PRINT NOTES
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper]
+%\setbeameroption{show notes on second screen=bottom} % Beamer manual, section 19.3
+%\usetemplatenote{\beamertemplatefootempty \insertnote}
+%%%%%%%%%%% PRINT NOTES
+
+%\useoutertheme{shadow}
+%\setbeamertemplate{items}[default]
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}[frame number]
+
+\author{Sebastian Bernauer}
+\title[Pixelflut v6]{Pixelflut v6\\As fast as possible?}
+
+%\AtBeginSection[]
+%{
+%	\begin{frame}{Inhalt}
+%	\tableofcontents[currentsection]
+%	\end{frame}
+%}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}%[allowframebreaks]
+\frametitle{Inhalt}
+\tableofcontents
+\end{frame}
+
+\section{Pixelflut v4}
+\begin{frame}{Pixelflut v4}
+	\begin{itemize}
+		\item ASCII-Befehle über TCP, Zeile für Zeile
+	\end{itemize}
+	\vfill
+	\begin{tcolorbox}[title=Verwendung]
+	echo "PX x y rrggbb[aa]" $\vert$ nc 127.0.0.1 1234
+	\end{tcolorbox}
+\end{frame}
+
+\subsection{Software}
+\begin{frame}{Software}
+	\begin{itemize}
+		\item Server: shoreline von TobleMiner
+		\begin{itemize}
+			\item 37G
+			\item https://github.com/TobleMiner/shoreline
+		\end{itemize}
+		\item Client: sturmflut
+		\begin{itemize}
+			\item 80G
+			\item https://github.com/TobleMiner/sturmflut
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Pixelflut v6}
+\begin{frame}[fragile]{Pixelflut v6}
+	Das Format der zu sendenden IPv6-Adresse:
+	\begin{itemize}
+	\item 64 bit festes Prefix
+	\item    16 bit X-Koordinate
+	\item    16 bit Y-Koordinate
+	\item    8 bit R
+	\item    8 bit G
+	\item    8 bit B
+	\item    8 bit Padding
+	\end{itemize}
+	
+	Gesamt ergibt sich: \texttt{Prefix:XXXX:YYYY:RRGG:BBPP}
+\end{frame}
+
+\begin{frame}{Beispiel}
+	\begin{tcolorbox}[title=Beispiel]
+	ping 4000:42:0:0:0505:ffaa:ccff\\
+	\begin{itemize}
+		\item Netz: 4000:42::/64
+		\item X = 5
+		\item Y = 5
+		\item Farbe: 0xffaacc
+	\end{itemize}
+	\end{tcolorbox}
+\end{frame}
+
+\section{Netzarchitektur}
+\begin{frame}{Netzarchitektur}
+	\begin{itemize}
+		\item Neighbor Discovery von $>$ 2 Millionen IPv6 Adressen (Full HD)?\\
+		\pause
+		$\rightarrow$ Nein!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Netzarchitektur}
+\includegraphics[width=8cm]{figures/network_structure_cut}
+\end{frame}
+
+\end{document}
