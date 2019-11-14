@@ -164,6 +164,7 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{XDP}
 \begin{frame}{XDP}
 	\begin{itemize}
 		\item Hat wunderbar funktioniert
@@ -195,17 +196,35 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{DPDK}
+\begin{frame}{DPDK}
+	\begin{itemize}
+		\item Netzwerkkarte wird komplett im Userspace angesprochen\\
+		$\rightarrow$ Keine Kontextwechsel\\
+		$\rightarrow$ Keine Interrupts, sondern pollbasiert\\
+		$\rightarrow$ Es gibt keine bequemen Kernel-Features wie Ping-Antwort oder Neighbor Discovery\\
+		$\rightarrow$ Nur bestimmte Karten unterstützt (z.B. am Mellanox ConnectX-3)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{DPDK}
+	\hspace{2cm}
+	\includegraphics[width=8cm]{figures/dpdk}
+\end{frame}
+
 \section{Netzarchitektur}
 \begin{frame}{Netzarchitektur}
 	\begin{itemize}
 		\item Neighbor Discovery von $>$ 2 Millionen IPv6 Adressen (Full HD)?\\
 		\pause
-		$\rightarrow$ Nein!
+		$\rightarrow$ Nein!\\
+		\pause
+		$\rightarrow$ Transit-Netz mit einer einzigen next-hop IP-Adresse
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Netzarchitektur}
-\includegraphics[width=8cm]{figures/network_structure_cut}
+	\includegraphics[width=8cm]{figures/network_structure_cut}
 \end{frame}
 
 \end{document}
